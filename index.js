@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const mongoose = require("mongoose");
 const routeFactory = require("./helpers/routeFactory");
-const { getAll, createOne, deleteOne } = require("./routes/animeList");
+const { getAll, createOne, deleteOne, deleteMany } = require("./routes/animeList");
 
 app.use(cors());
 app.use(express.json());
@@ -19,7 +19,7 @@ async function main() {
   await mongoose.connect(MONGO);
 }
 
-routeFactory([getAll, createOne, deleteOne], app);
+routeFactory([getAll, createOne, deleteOne, deleteMany], app);
 
 app.use(errorMiddleware);
 

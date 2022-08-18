@@ -2,9 +2,10 @@ const { Anime } = require("../../models");
 
 module.exports = {
   method: "delete",
-  route: "/animeLists/:uid/:list/:id",
+  route: "/animeLists/:uid/:list",
   handler: async (req, res, next) => {
-    const { uid: userId, list, id } = req.params;
+    const { uid: userId, list } = req.params;
+    const { itemsIdToDelete } = req.body
     const animes = await Anime.findById(userId);
 
     if (!animes) {
@@ -29,7 +30,9 @@ module.exports = {
       };
     }
 
-    await Anime.findOneAndUpdate({_id: userId}, {[list]: animes[list].filter((a) => a.id !== id)});
+    await Anime.findOneAndUpdate({
+      _id: userId},
+       {[list]: animes[list].filter((a) => !itemsIdToDelete.includes(a.id))});
 
     return {
       status: 204,

@@ -12,6 +12,7 @@ module.exports = function errorMiddleware(err, req, res, next) {
     case "CONFLICT":
       return res.status(409).json(error);
     default:
+      console.error(err);
       return res.status(500).send("UNDEFINED ERROR");
   }
 };
