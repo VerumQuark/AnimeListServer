@@ -15,11 +15,11 @@ const sortCondition = (sort = SORT.NAME, order = SORT_ORDER.ASC) => {
       return (a, b) => {
         switch (order) {
           case SORT_ORDER.ASC:
-            return -1 * a.title.localeCompare(b);
+            return a.title.localeCompare(b.title);
           case SORT_ORDER.DESC:
-            return a.title.localeCompare(b);
+            return -1 * a.title.localeCompare(b.title);
           default:
-            return -1 * a.title.localeCompare(b);
+            return a.title.localeCompare(b.title);
         }
       };
     case SORT.RATING:
