@@ -25,6 +25,12 @@ module.exports = {
       };
     }
 
+    for (const key in animes) {
+      const sortedArray = animes[key]
+      sortedArray.sort()
+      animes[key] = sortedArray 
+    }
+
     return {
       status: 200,
       data: animes,
