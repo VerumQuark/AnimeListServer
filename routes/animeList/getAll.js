@@ -25,10 +25,14 @@ module.exports = {
       };
     }
 
-    for (const key in animes) {
-      const sortedArray = animes[key]
-      sortedArray.sort()
-      animes[key] = sortedArray 
+    for (const key in animes.toJSON()) {
+      const sortedArray = animes.toJSON()[key];
+      try {
+        sortedArray.sort();
+      } catch {
+        continue;
+      }
+      animes[key] = sortedArray;
     }
 
     return {
